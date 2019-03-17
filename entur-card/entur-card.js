@@ -1,10 +1,14 @@
-class  EnTurCard extends HTMLElement {
-  set hass (hass) {
 
+class  EnTurCard extends HTMLElement {
+	
+  set hass (hass) {
+	 
+    this._hass = hass;
     const entities = this.config.entities;
     const title    = this.config.title;
     const icon     = this.config.icon;
     const showhuman = this.config.human;
+	 
 
     if (!this.content) {
       const card = document.createElement('ha-card')
@@ -17,21 +21,17 @@ class  EnTurCard extends HTMLElement {
         .entur {
           padding: 0 16px 16px;
         }
-
         .entur-glance {
           color: hsla(214, 90%, 52%, 0.8);
         }
-
         .entur .ha-icon {
           height: 20px;
           width: 20px;
         }
-
         .entur-item {
           padding-bottom: 0.5em;
           padding-left: 10px;
         }
-
         .entur-header {
         }
         
@@ -41,7 +41,6 @@ class  EnTurCard extends HTMLElement {
           margin-right: 8px;
           margin-bottom: 5px
         }
-
         .entur-title {
           flex: 1;
         }
@@ -82,11 +81,9 @@ class  EnTurCard extends HTMLElement {
         .entur .ontime {
           color: hsla(214, 90%, 52%, 0.8);
         }
-
         .entur .delayed {
           color: rgba(231, 76, 60, .8);
         }
-
         .entur .ha-icon.traffic {
           height: 16px;
           width: 16px;
@@ -139,6 +136,7 @@ class  EnTurCard extends HTMLElement {
       card.appendChild(style)
       card.appendChild(this.content)
       this.appendChild(card)
+	  
     }
 
     var enturHtml = `
@@ -146,6 +144,9 @@ class  EnTurCard extends HTMLElement {
     `
 
     entities.forEach( function(entityId) {
+		
+		
+		
 
       const state = hass.states[entityId.entity];
 
@@ -153,6 +154,7 @@ class  EnTurCard extends HTMLElement {
       const icon = entityId.icon ? entityId.icon : state.attributes['icon']; 
       const destination = entityId.destination ? entityId.destination : 'unavailable';
       
+
       const line = state.attributes['route'];
       const delay = state.attributes['delay'];
       const time = moment(state.attributes['due_at']).format('HH:mm');
@@ -177,6 +179,7 @@ class  EnTurCard extends HTMLElement {
               <span class="station"> -> ${destination}</span>
         `
       }
+
       enturHtml += `
             </div>
           </div>
@@ -192,6 +195,7 @@ class  EnTurCard extends HTMLElement {
                 <span class="delay">${delay} min.</span>
               </span>
             </div>
+
             
             <div class="entur-glance">
               <ha-icon class="ha-icon clock" icon="mdi:clock"></ha-icon>
@@ -203,7 +207,7 @@ class  EnTurCard extends HTMLElement {
         enturHtml += `
           <div class="entur-footer">
             <span class="entur-footer-text">
-              Arrives ${human}
+              Kommer ${human}
             </span>
           </div>
         `
@@ -230,7 +234,7 @@ class  EnTurCard extends HTMLElement {
         enturHtml += `
           <div class="entur-footer">
             <span class="entur-footer-text">
-              Arrives ${next_human}
+              Kommer ${next_human}
             </span>
           </div>
         `
