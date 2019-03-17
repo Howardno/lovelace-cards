@@ -13,7 +13,9 @@ This card is made to work with the [Entur public transport](https://www.home-ass
 
 ```yaml
 resources:
-  - url: https://unpkg.com/moment@2.22.2/moment.js
+  - url: https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js
+    type: js
+  - url: https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/nb.js
     type: js
   - url: /local/entur-card.js?v=1
     type: js
